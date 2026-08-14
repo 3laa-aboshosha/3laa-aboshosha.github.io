@@ -36,6 +36,20 @@ body{padding-right:260px}
 .hero-card .stats,.stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
 @media(max-width:700px){.hero-card .stats,.stats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}}
 
+
+/* ===== Final mobile header fix ===== */
+.nav{position:relative}
+.sidebar-toggle{position:static;flex:0 0 42px;width:42px;height:42px;padding:0;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;font-size:24px;line-height:1;cursor:pointer;z-index:10000}
+@media(min-width:801px){.sidebar-toggle{display:none}}
+@media(max-width:800px){
+  .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px}
+  .brand{order:2;margin:0;flex:1;justify-content:center;font-size:16px;white-space:nowrap}
+  .theme{order:1;flex:0 0 42px}
+  .sidebar-toggle{order:3;display:grid;place-items:center;box-shadow:none}
+  .nav nav{display:none}
+  .logo{display:none}
+}
+@media(max-width:420px){.brand{font-size:14px}.nav{padding:0 10px}}
 </style></head>
 <body>
 
@@ -51,7 +65,7 @@ body{padding-right:260px}
   <a href="https://www.facebook.com/Alaa.AbOshOsha12" target="_blank" rel="noopener">📘 فيسبوك</a>
 </aside>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-<button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="فتح القائمة">☰</button>
+
 <script>
 function toggleSidebar(){
  const s=document.getElementById('siteSidebar');
@@ -62,7 +76,7 @@ function toggleSidebar(){
 
 <header><div class="container nav"><a class="brand" href="index.html"><span class="logo">م</span>Alaa Aboshosha | موسوعة المساعدة</a>
 <nav><a href="index.html">الرئيسية</a><a href="#latest">المقالات</a><a href="#categories">الأقسام</a><a href="about.html">من نحن</a><a href="contact.html">تواصل معنا</a></nav>
-<button id="theme" class="theme">☾</button></div></header>
+<button id="theme" class="theme">☾</button><button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="فتح القائمة">☰</button></div></header>
 <section class="hero"><div class="container hero-inner"><div><span class="badge">منصة عربية مجانية</span><h1>معلومة واضحة، <span>حل عملي</span>، ومساعدة للجميع.</h1><p>شروحات تقنية وحلول مبسطة للهواتف والكمبيوتر والتطبيقات والحماية الرقمية.</p><div class="actions"><a class="btn primary" href="#latest">ابدأ القراءة</a><a class="btn ghost" href="#categories">استكشف الأقسام</a></div></div>
 <div class="hero-search"><h3>🔎 ابحث في الموسوعة</h3><input id="search" placeholder="مثال: بطء الهاتف، ويندوز، حماية الحساب..." aria-label="البحث"><div id="results"></div></div></div></section>
 <section id="categories" class="section"><div class="container"><div class="head"><div><span class="badge">التصنيفات</span><h2>اختر القسم المناسب</h2></div></div><div class="cats">
