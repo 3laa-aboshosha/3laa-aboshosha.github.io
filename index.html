@@ -15,8 +15,51 @@ footer{background:#07111f;color:#cbd5e1;margin-top:50px}.foot{padding:52px 0;dis
 body.dark{--bg:#060b14;--surface:#0e1624;--surface2:#111f34;--text:#edf2f7;--muted:#94a3b8;--line:#203049}body.dark header{background:rgba(6,11,20,.82);border-color:#17263b}body.dark .brand{color:#fff}body.dark .nav nav a{color:#b7c3d4}body.dark .theme,body.dark .hero-search,body.dark .card,body.dark .cats button,body.dark .contact-card{background:var(--surface);border-color:var(--line);color:var(--text)}body.dark .hero{background:radial-gradient(circle at 15% 20%,#10274a 0,transparent 34%),radial-gradient(circle at 85% 10%,#25164b 0,transparent 30%),#08111e}body.dark .hero p{color:#aebbd0}body.dark .hero-search input{background:#0a1220;color:#fff;border-color:#263852}body.dark .ghost{background:#101a2a;color:#8fb2ff;border-color:#2d4e84}body.dark .cats button:hover,body.dark .cats button.active{background:#10213a;border-color:#315fa8}body.dark .callout{background:linear-gradient(135deg,#0b1423,#132a4b 55%,#25133e)}
 @media(max-width:950px){.cats{grid-template-columns:repeat(3,1fr)}.hero-inner{grid-template-columns:1fr;gap:30px}.hero{padding-top:65px}.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.container{width:min(94%,1180px)}.nav{min-height:66px}.nav nav{display:none}.brand{font-size:14px}.logo{width:39px;height:39px}.hero{padding:52px 0 55px}.hero h1{font-size:39px}.hero p{font-size:16px}.actions{flex-direction:column}.actions .btn{width:100%}.section{padding:52px 0}.head h2{font-size:27px}.cats{grid-template-columns:repeat(2,1fr)}.cats button{padding:15px 8px;font-size:13px}.grid{grid-template-columns:1fr}.card{padding:21px}.callout{display:block;padding:30px}.callout .btn{margin-top:15px}.foot{grid-template-columns:1fr;gap:20px;padding:38px 0}.hero-search{padding:22px}}
+
+/* ===== Sidebar Navigation ===== */
+.site-sidebar{position:fixed;top:0;right:0;width:260px;height:100vh;z-index:9999;padding:28px 18px;background:rgba(15,23,42,.96);backdrop-filter:blur(14px);box-shadow:-8px 0 30px rgba(0,0,0,.16);transform:translateX(0);transition:.3s}
+.site-sidebar h3{margin:0 0 18px;color:#fff;font-size:20px}
+.site-sidebar a{display:flex;align-items:center;gap:10px;padding:12px 14px;margin:6px 0;border-radius:12px;color:#e5e7eb;text-decoration:none;font-weight:700}
+.site-sidebar a:hover{background:rgba(255,255,255,.1)}
+.sidebar-toggle{position:fixed;top:18px;right:18px;z-index:10000;border:0;border-radius:12px;padding:10px 13px;font-size:20px;cursor:pointer}
+.sidebar-overlay{display:none}
+body{padding-right:260px}
+@media(max-width:800px){
+ body{padding-right:0}
+ .site-sidebar{transform:translateX(110%)}
+ .site-sidebar.open{transform:translateX(0)}
+ .sidebar-overlay.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9998}
+}
+
+
+/* stats-horizontal-final */
+.hero-card .stats,.stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+@media(max-width:700px){.hero-card .stats,.stats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}}
+
 </style></head>
 <body>
+
+<aside class="site-sidebar" id="siteSidebar" aria-label="القائمة الجانبية">
+  <h3>📚 أقسام الموقع</h3>
+  <a href="./">🏠 الرئيسية</a>
+  <a href="#laptop-guide">💻 الكمبيوتر واللابتوبات</a>
+  <a href="#phones">📱 الهواتف</a>
+  <a href="#bitdefender-guide">🛡️ الحماية والأمان</a>
+  <a href="#networks">🌐 الإنترنت والشبكات</a>
+  <a href="#guides">🔧 الشروحات والحلول</a>
+  <a href="#library">📚 المكتبة</a>
+  <a href="https://www.facebook.com/Alaa.AbOshOsha12" target="_blank" rel="noopener">📘 فيسبوك</a>
+</aside>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="فتح القائمة">☰</button>
+<script>
+function toggleSidebar(){
+ const s=document.getElementById('siteSidebar');
+ const o=document.getElementById('sidebarOverlay');
+ s.classList.toggle('open'); o.classList.toggle('show');
+}
+</script>
+
 <header><div class="container nav"><a class="brand" href="index.html"><span class="logo">م</span>Alaa Aboshosha | موسوعة المساعدة</a>
 <nav><a href="index.html">الرئيسية</a><a href="#latest">المقالات</a><a href="#categories">الأقسام</a><a href="about.html">من نحن</a><a href="contact.html">تواصل معنا</a></nav>
 <button id="theme" class="theme">☾</button></div></header>
@@ -168,4 +211,12 @@ function render(list,id="grid"){const el=document.getElementById(id);if(el)el.in
 render(data);render(data,"allGrid");
 document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(b.dataset.cat==="all"?data:data.filter(a=>a.cat===b.dataset.cat))});
 const s=document.getElementById("search"),r=document.getElementById("results");if(s)s.addEventListener("input",()=>{const q=s.value.trim().toLowerCase();const list=q?data.filter(a=>(a.title+" "+a.desc+" "+a.tag).toLowerCase().includes(q)):[];r.innerHTML=list.map(a=>`<div class="search-result"><a href="${a.file}">${a.title}</a><div>${a.tag}</div></div>`).join("")});
-const t=document.getElementById("theme");if(localStorage.dark==="1")document.body.classList.add("dark");if(t)t.onclick=()=>{document.body.classList.toggle("dark");localStorage.dark=document.body.classList.contains("dark")?"1":"0"};document.querySelectorAll("#year").forEach(x=>x.textContent=new Date().getFullYear());</script></body></html>
+const t=document.getElementById("theme");if(localStorage.dark==="1")document.body.classList.add("dark");if(t)t.onclick=()=>{document.body.classList.toggle("dark");localStorage.dark=document.body.classList.contains("dark")?"1":"0"};document.querySelectorAll("#year").forEach(x=>x.textContent=new Date().getFullYear());</script>
+<div class="callout" style="margin-top:24px">
+  <span class="badge">📞 تواصل معنا</span>
+  <h3>🔵 تواصل معنا عبر Telegram</h3>
+  <p>راسلنا مباشرة عبر تيليجرام 💬</p>
+  <a class="btn" href="https://t.me/Alaa_Aboshosha12" target="_blank" rel="noopener">فتح Telegram</a>
+</div>
+
+</body></html>
