@@ -121,6 +121,24 @@ body.dark .card a:hover{background:#19345d}
   background:var(--surface) !important;
   color:var(--text) !important;
 }
+/* ===== Stats cards dark/light contrast fix ===== */
+.pro-stat{
+  background:var(--surface) !important;
+  color:var(--text) !important;
+  border-color:var(--line) !important;
+}
+.pro-stat strong{color:var(--text) !important;}
+.pro-stat small{color:var(--muted) !important;}
+.pro-stat .ico{color:var(--primary) !important;}
+body.dark .pro-stat{
+  background:#0e1624 !important;
+  color:#edf2f7 !important;
+  border-color:#203049 !important;
+}
+body.dark .pro-stat strong{color:#ffffff !important;}
+body.dark .pro-stat small{color:#94a3b8 !important;}
+body.dark .pro-stat .ico{background:rgba(96,165,250,.12) !important;color:#8fb2ff !important;}
+
 body.dark .site-sidebar{
   background:#080f1c !important;
   color:#f8fafc !important;
