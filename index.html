@@ -157,8 +157,10 @@ body.dark .site-sidebar a:hover,body.dark .site-sidebar a:focus,body.dark .site-
   }
 }
 </style>
+<style id="egypt-clock-style">.egypt-clock{position:fixed;top:16px;left:18px;z-index:9999;display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:14px;background:rgba(15,23,42,.88);color:#fff;border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 28px rgba(15,23,42,.20);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-family:inherit;direction:ltr}.egypt-clock .clock-icon{font-size:18px;line-height:1}.egypt-clock .clock-time{font-size:15px;font-weight:900;letter-spacing:.8px;font-variant-numeric:tabular-nums;min-width:72px;text-align:center}.egypt-clock .clock-label{font-size:10px;font-weight:700;opacity:.7;direction:rtl}@media(max-width:700px){.egypt-clock{top:10px;left:10px;padding:7px 10px;gap:6px;border-radius:12px}.egypt-clock .clock-time{font-size:13px;min-width:63px}.egypt-clock .clock-label{display:none}.egypt-clock .clock-icon{font-size:16px}}</style>
 </head>
 <body>
+<div class="egypt-clock" id="egyptClock" aria-label="الساعة بتوقيت مصر"><span class="clock-icon">🕐</span><span class="clock-time" id="egyptClockTime">00:00:00</span><span class="clock-label">مصر</span></div><script>(function(){function updateEgyptClock(){const el=document.getElementById('egyptClockTime');if(!el)return;const now=new Date();const parts=new Intl.DateTimeFormat('ar-EG',{timeZone:'Africa/Cairo',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(now);const get=t=>parts.find(p=>p.type===t)?.value||'00';el.textContent=get('hour')+':'+get('minute')+':'+get('second')}updateEgyptClock();setInterval(updateEgyptClock,1000)})();</script>
 
 <aside class="site-sidebar" id="siteSidebar" aria-label="القائمة الجانبية">
   <h3>📚 أقسام الموقع</h3>
