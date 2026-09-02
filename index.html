@@ -244,6 +244,26 @@ details summary{cursor:pointer}
   h3{font-size:17px!important}
 }
 </style>
+
+<style id="clean-article-view-fix">
+/* ===== Clean article view: never show all long articles on homepage ===== */
+.article-section-hidden { display: none !important; }
+.article-section-active { display: block !important; }
+.article-back-btn { margin: 0 0 18px; display: inline-flex; align-items: center; gap: 8px; }
+/* Keep content images compact and prevent layout overflow */
+.section img, .article img, .hero img, .pro-feature img, .card img { max-width: 100% !important; height: auto !important; object-fit: contain !important; }
+.article img { max-height: 520px; width: auto; margin-inline: auto; display: block; }
+@media (max-width: 900px) {
+  .article img { max-height: 360px; }
+}
+@media (max-width: 600px) {
+  .article img { max-height: 240px; }
+  .hero img, .pro-feature img { max-height: 190px !important; }
+}
+/* Give the clock its own safe box so it cannot overlap the title/nav */
+.egypt-clock { position: relative !important; z-index: 2; width: min(100%, 300px); max-width: 300px; box-sizing: border-box; margin: 10px auto 18px; overflow: hidden; }
+@media (max-width: 800px) { .egypt-clock { width: min(100%, 245px); max-width: 245px; margin: 8px auto 14px; } }
+</style>
 </head>
 <body>
 <div class="egypt-clock" id="egyptClock" aria-label="الساعة بتوقيت مصر"><span class="clock-icon">🕐</span><span class="clock-time" id="egyptClockTime">00:00:00</span><span class="clock-label">مصر</span></div><script>(function(){function updateEgyptClock(){const el=document.getElementById('egyptClockTime');if(!el)return;const now=new Date();const parts=new Intl.DateTimeFormat('ar-EG',{timeZone:'Africa/Cairo',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(now);const get=t=>parts.find(p=>p.type===t)?.value||'00';el.textContent=get('hour')+':'+get('minute')+':'+get('second')}updateEgyptClock();setInterval(updateEgyptClock,1000)})();</script>
@@ -289,7 +309,7 @@ function toggleSidebar(){
 <section id="latest" class="section"><div class="container"><div class="head"><div><span class="badge">أحدث المحتوى</span><h2>موضوعات مختارة</h2></div></div><div id="grid" class="grid"></div></div></section>
 
 <section class="section" id="help-articles"><div class="container"><div class="head"><span class="badge">المقالات</span><h2>25 موضوعًا جاهزًا للقراءة</h2></div><div id="allGrid" class="grid"></div></div></section>
-<section class="section" id="lost-phone"><div class="container">
+<section class="section article-section-hidden" id="lost-phone"><div class="container">
 <div class="head"><span class="badge">📱 دليل مهم</span><h2>طرق استرجاع الهاتف المفقود أو المسروق</h2></div>
 <div class="card article">
 <p><strong>فقدان الهاتف لا يعني بالضرورة فقدانه نهائيًا.</strong> ابدأ أولًا بحماية حساباتك وبياناتك، ثم استخدم خدمة العثور المناسبة لنوع جهازك. إذا ظهر موقع الجهاز في مكان غير معروف، لا تحاول استرداده بنفسك؛ تواصل مع الجهات المختصة.</p>
@@ -345,7 +365,7 @@ function toggleSidebar(){
 </div></div></section>
 
 
-<section class="section" id="my-ntra-guide">
+<section class="section article-section-hidden" id="my-ntra-guide">
 <div class="container prose">
 <span class="badge">📱 خدمات واتصالات</span>
 <h1>🚨 مهم جدًا 📱 تحديث تطبيق My NTRA ومراجعة الأرقام والمحافظ المسجلة باسمك</h1>
@@ -379,7 +399,7 @@ function toggleSidebar(){
 </div>
 </section>
 
-<section class="section" id="messenger-topazwin-scam">
+<section class="section article-section-hidden" id="messenger-topazwin-scam">
 <div class="container prose">
 <span class="badge">🚨 حماية وأمان</span>
 <h1>🚨 تَحذير مُهِم جِدًّا 🚨 | خَلّي بالك من الفخ ده!</h1>
@@ -427,7 +447,7 @@ function toggleSidebar(){
 </div>
 </section>
 
-<section class="section" id="laptop-guide">
+<section class="section article-section-hidden" id="laptop-guide">
 <div class="container prose">
 <span class="badge">💻 دليل اللابتوبات</span>
 <h1>دليل ترشيحات اللابتوب للشغل الشاق والبرمجة والتصميم</h1>
@@ -463,7 +483,7 @@ function toggleSidebar(){
 </section>
 
 
-<section class="section" id="bitdefender-guide">
+<section class="section article-section-hidden" id="bitdefender-guide">
 <div class="container prose">
 <span class="badge">🛡️ حماية وأمان</span>
 <h1>🛡️ احصل على ⓺ أشهر من الحماية الشاملة مجانًا</h1>
@@ -545,5 +565,34 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 });
+</script>
+
+<script id="single-article-view-fix">
+(function(){
+  const ids = ['lost-phone','my-ntra-guide','messenger-topazwin-scam','laptop-guide','bitdefender-guide'];
+  const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+  function hideAll(){ sections.forEach(sec => { sec.classList.remove('article-section-active'); sec.classList.add('article-section-hidden'); }); }
+  function addBack(sec){
+    if(sec.querySelector('.article-back-btn')) return;
+    const c=sec.querySelector('.container');
+    if(!c) return;
+    const b=document.createElement('a');
+    b.href='#latest'; b.className='btn ghost article-back-btn'; b.textContent='← العودة إلى المقالات';
+    c.insertBefore(b,c.firstChild);
+  }
+  function showFromHash(){
+    const id=decodeURIComponent(location.hash.replace('#',''));
+    hideAll();
+    const sec=sections.find(x=>x.id===id);
+    if(!sec) return;
+    sec.classList.remove('article-section-hidden');
+    sec.classList.add('article-section-active');
+    addBack(sec);
+    setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),30);
+  }
+  sections.forEach(addBack);
+  window.addEventListener('hashchange',showFromHash);
+  document.addEventListener('DOMContentLoaded',showFromHash);
+})();
 </script>
 </body></html>
