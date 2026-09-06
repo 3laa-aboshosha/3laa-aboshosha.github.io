@@ -264,6 +264,41 @@ details summary{cursor:pointer}
 .egypt-clock { position: relative !important; z-index: 2; width: min(100%, 300px); max-width: 300px; box-sizing: border-box; margin: 10px auto 18px; overflow: hidden; }
 @media (max-width: 800px) { .egypt-clock { width: min(100%, 245px); max-width: 245px; margin: 8px auto 14px; } }
 </style>
+
+<style id="homepage-v2">
+/* ===== Homepage V2 ===== */
+:root{--bg:#070b12;--surface:#0d1420;--surface2:#121c2b;--text:#f4f7fb;--muted:#9aa8bb;--line:#243247;--accent:#4f8cff;--accent2:#7c5cff;--glow:rgba(79,140,255,.22)}
+html,body{background:var(--bg);color:var(--text)}
+body{min-height:100vh;overflow-x:hidden}
+header{position:sticky;top:0;z-index:900;background:rgba(7,11,18,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(91,112,142,.22)}
+header .container{min-height:72px}
+.brand{font-weight:800;letter-spacing:.1px;color:#fff}
+.logo{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 8px 28px rgba(79,140,255,.25)}
+nav a{color:#b9c5d6}nav a:hover{color:#fff}
+.hero{padding:105px 0 80px;background:radial-gradient(circle at 15% 18%,rgba(43,111,255,.24),transparent 32%),radial-gradient(circle at 85% 10%,rgba(124,92,255,.2),transparent 30%),linear-gradient(145deg,#080d17,#0b1422 58%,#090d16);border-bottom:1px solid #172338}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49%,rgba(255,255,255,.018) 50%,transparent 51%);pointer-events:none}
+.hero-inner{align-items:center;gap:55px}
+.hero h1{font-size:clamp(34px,4vw,58px);line-height:1.25;color:#fff;max-width:720px;margin:18px 0 16px}
+.hero h1 span{background:linear-gradient(90deg,#6ea1ff,#9d86ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;color:#aab7ca;max-width:680px}
+.badge,.tag,.eyebrow{border:1px solid rgba(99,139,202,.28);background:rgba(25,39,61,.72);color:#9fc0ff;box-shadow:0 8px 25px rgba(0,0,0,.12)}
+.actions{margin-top:28px}.btn{border-radius:14px!important;min-height:48px;padding:11px 20px!important}.btn.primary{background:linear-gradient(135deg,#397cf5,#6755e8);border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 30px rgba(63,108,230,.25)}.btn.ghost{background:#111b2a;border-color:#2a3b56;color:#bcd0ef}
+.hero-search{background:linear-gradient(145deg,rgba(17,28,44,.94),rgba(9,16,27,.94));border:1px solid #263853;border-radius:24px;padding:28px;box-shadow:0 25px 70px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.04)}
+.hero-search h3{color:#eaf1fb;font-size:20px}.hero-search input{height:54px;border-radius:15px!important;background:#080f1b!important;color:#fff!important;border:1px solid #2a3d59!important}.hero-search input::placeholder{color:#718197}
+.section{padding:64px 0}.section:nth-of-type(even){background:#080e17}
+.pro-stats{gap:14px}.pro-stat,.pro-feature article,.card,.callout,.contact-card{background:linear-gradient(145deg,#0f1826,#0b121d)!important;border:1px solid #23334a!important;box-shadow:0 14px 45px rgba(0,0,0,.18)!important}.pro-stat{transition:.25s}.pro-stat:hover,.card:hover{transform:translateY(-4px);border-color:#355985!important;box-shadow:0 18px 55px rgba(0,0,0,.28)!important}
+.pro-stat strong{color:#fff}.pro-stat small,.card p,.muted{color:#95a4b8!important}
+.pro-feature{gap:18px}.pro-feature article{border-radius:22px!important;padding:30px!important}.pro-feature h3{color:#fff;font-size:25px}.pro-feature a,.card a{color:#76a7ff;font-weight:700}
+.head h2{color:#fff;font-size:32px}.cats{gap:12px}.cats button{background:#0e1724!important;color:#aebbd0!important;border:1px solid #26374f!important;border-radius:14px!important;padding:13px 18px!important}.cats button:hover,.cats button.active{background:#14243a!important;color:#fff!important;border-color:#4774ae!important;box-shadow:0 8px 25px rgba(37,91,165,.18)}
+.grid{gap:18px}.card{border-radius:20px!important;padding:23px!important;min-height:235px;transition:.25s}.card h3{color:#fff;font-size:20px;line-height:1.55}.card .tag{display:inline-block;margin-bottom:10px}
+.egypt-clock{top:88px!important;left:24px!important;right:auto!important;background:linear-gradient(145deg,#101b2c,#0a1220)!important;border:1px solid #2d4a70!important;box-shadow:0 15px 45px rgba(0,0,0,.3),0 0 30px rgba(55,121,238,.12)!important;color:#fff!important;border-radius:18px!important;padding:10px 14px!important}
+.egypt-clock .clock-time{color:#9fc1ff!important;font-weight:800}.egypt-clock .clock-label{color:#a7b6ca!important}
+footer{background:#050910!important;border-top:1px solid #1b293c!important}.foot strong,footer strong{color:#fff}.foot p,footer p{color:#8998ad}
+.article-section-hidden{display:none!important}.article-section-hidden.is-open{display:block!important}
+@media(max-width:950px){.hero{padding:145px 0 58px}.hero-inner{gap:25px}.hero h1{font-size:36px}.egypt-clock{top:82px!important;left:4%!important;right:4%!important;width:auto!important;justify-content:center}.grid{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:600px){header .container{min-height:62px}.brand{font-size:14px}.hero{padding-top:135px}.hero h1{font-size:29px}.hero p{font-size:16px}.hero-search{padding:20px;border-radius:18px}.section{padding:45px 0}.pro-stats,.pro-feature{grid-template-columns:1fr!important}.grid{grid-template-columns:1fr!important}.cats{grid-template-columns:repeat(2,1fr)!important}.cats button{font-size:13px;padding:11px 8px!important}.card{min-height:auto}.egypt-clock{top:70px!important;padding:8px 10px!important;font-size:13px}.egypt-clock .clock-time{font-size:15px}}
+</style>
+
 </head>
 <body>
 <div class="egypt-clock" id="egyptClock" aria-label="الساعة بتوقيت مصر"><span class="clock-icon">🕐</span><span class="clock-time" id="egyptClockTime">00:00:00</span><span class="clock-label">مصر</span></div><script>(function(){function updateEgyptClock(){const el=document.getElementById('egyptClockTime');if(!el)return;const now=new Date();const parts=new Intl.DateTimeFormat('ar-EG',{timeZone:'Africa/Cairo',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(now);const get=t=>parts.find(p=>p.type===t)?.value||'00';el.textContent=get('hour')+':'+get('minute')+':'+get('second')}updateEgyptClock();setInterval(updateEgyptClock,1000)})();</script>
@@ -546,7 +581,7 @@ if(s)s.addEventListener("input",()=>{
 });
 
 const t=document.getElementById("theme");
-if(localStorage.dark==="1")document.body.classList.add("dark");
+if(localStorage.dark!=="0")document.body.classList.add("dark");
 if(t)t.onclick=()=>{document.body.classList.toggle("dark");localStorage.dark=document.body.classList.contains("dark")?"1":"0"};
 document.querySelectorAll("#year").forEach(x=>x.textContent=new Date().getFullYear());
 
