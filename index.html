@@ -86,10 +86,14 @@ header{height:205px;background:transparent;position:relative;border:0}.nav{heigh
   .cats{grid-template-columns:1fr 1fr}
 }
 
-/* PREMIUM SINGLE ARTICLE VIEW */
-.article-section-hidden{display:none!important;}
-.article-section-active{display:block!important;}
-body.article-open .hero,body.article-open #stats,body.article-open #pro-feature,body.article-open #categories,body.article-open #latest,body.article-open #help-articles{display:none!important;}
+/* PREMIUM SINGLE ARTICLE VIEW — one article at a time */
+.article-section-hidden{display:none!important;visibility:hidden!important;}
+.article-section-active{display:block!important;visibility:visible!important;}
+body.article-open .home-shell,
+body.article-open #help-articles,
+body.article-open footer{display:none!important;}
+body.article-open .article-section-hidden{display:none!important;}
+body.article-open .article-section-active{display:block!important;}
 .article-back-btn{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;padding:11px 18px;border-radius:14px;border:1px solid rgba(100,180,255,.25);background:rgba(20,30,55,.72);color:inherit;text-decoration:none;font-weight:700;cursor:pointer;}
 .article-back-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
 </style></head>
@@ -171,7 +175,7 @@ function updateEgyptClock(){
 <section class="section" aria-label="ملخص الموقع"><div class="pro-stats"><div class="pro-stat"><div class="ico">📚</div><div><strong>25+</strong><small>موضوعًا ودليلًا</small></div></div><div class="pro-stat"><div class="ico">📱</div><div><strong>4+</strong><small>مجالات تقنية</small></div></div><div class="pro-stat"><div class="ico">🛡️</div><div><strong>موثوق</strong><small>محتوى للتوعية والحلول</small></div></div><div class="pro-stat"><div class="ico">⚡</div><div><strong>سريع</strong><small>وصول أسهل للمعلومة</small></div></div></div></section>
 </main>
 <section class="section" id="help-articles"><div class="container"><div class="head"><span class="badge">المقالات</span><h2>25 موضوعًا جاهزًا للقراءة</h2></div><div id="allGrid" class="grid"></div></div></section>
-<section class="section" id="lost-phone" class="article-section-hidden"><div class="container">
+<section class="section article-section-hidden" id="lost-phone"><div class="container">
 <div class="head"><span class="badge">📱 دليل مهم</span><h2>طرق استرجاع الهاتف المفقود أو المسروق</h2></div>
 <div class="card article">
 <p><strong>فقدان الهاتف لا يعني بالضرورة فقدانه نهائيًا.</strong> ابدأ أولًا بحماية حساباتك وبياناتك، ثم استخدم خدمة العثور المناسبة لنوع جهازك. إذا ظهر موقع الجهاز في مكان غير معروف، لا تحاول استرداده بنفسك؛ تواصل مع الجهات المختصة.</p>
@@ -227,7 +231,7 @@ function updateEgyptClock(){
 </div></div></section>
 
 
-<section class="section" id="my-ntra-guide" class="article-section-hidden">
+<section class="section article-section-hidden" id="my-ntra-guide">
 <div class="container prose">
 <span class="badge">📱 خدمات واتصالات</span>
 <h1>🚨 مهم جدًا 📱 تحديث تطبيق My NTRA ومراجعة الأرقام والمحافظ المسجلة باسمك</h1>
@@ -261,7 +265,7 @@ function updateEgyptClock(){
 </div>
 </section>
 
-<section class="section" id="messenger-topazwin-scam" class="article-section-hidden">
+<section class="section article-section-hidden" id="messenger-topazwin-scam">
 <div class="container prose">
 <span class="badge">🚨 حماية وأمان</span>
 <h1>🚨 تَحذير مُهِم جِدًّا 🚨 | خَلّي بالك من الفخ ده!</h1>
@@ -309,7 +313,7 @@ function updateEgyptClock(){
 </div>
 </section>
 
-<section class="section" id="laptop-guide" class="article-section-hidden">
+<section class="section article-section-hidden" id="laptop-guide">
 <div class="container prose">
 <span class="badge">💻 دليل اللابتوبات</span>
 <h1>دليل ترشيحات اللابتوب للشغل الشاق والبرمجة والتصميم</h1>
@@ -345,7 +349,7 @@ function updateEgyptClock(){
 </section>
 
 
-<section class="section" id="bitdefender-guide" class="article-section-hidden">
+<section class="section article-section-hidden" id="bitdefender-guide">
 <div class="container prose">
 <span class="badge">🛡️ حماية وأمان</span>
 <h1>🛡️ احصل على ⓺ أشهر من الحماية الشاملة مجانًا</h1>
@@ -418,29 +422,51 @@ if(window.matchMedia("(max-width:800px)").matches){document.querySelectorAll(".s
 <script id="premium-single-article-view">
 (function(){
   const articleIds=['lost-phone','my-ntra-guide','messenger-topazwin-scam','laptop-guide','bitdefender-guide'];
-  const all=()=>articleIds.map(id=>document.getElementById(id)).filter(Boolean);
-  function closeAll(){all().forEach(el=>{el.classList.remove('article-section-active');el.classList.add('article-section-hidden');});document.body.classList.remove('article-open');}
-  function openArticle(id,scroll){
-    const target=document.getElementById(id); if(!target) return false;
-    closeAll(); target.classList.remove('article-section-hidden'); target.classList.add('article-section-active'); document.body.classList.add('article-open');
+  const getArticles=()=>articleIds.map(id=>document.getElementById(id)).filter(Boolean);
+  const getHome=()=>document.querySelector('.home-shell');
+  function closeAll(){
+    getArticles().forEach(el=>{el.classList.remove('article-section-active');el.classList.add('article-section-hidden');});
+    document.body.classList.remove('article-open');
+  }
+  function openArticle(id,scroll=true){
+    const target=document.getElementById(id);
+    if(!target || !articleIds.includes(id)) return false;
+    closeAll();
+    target.classList.remove('article-section-hidden');
+    target.classList.add('article-section-active');
+    document.body.classList.add('article-open');
     if(!target.querySelector('.article-back-btn')){
-      const b=document.createElement('a'); b.href='#help-articles'; b.className='article-back-btn'; b.innerHTML='← العودة إلى المقالات';
-      b.addEventListener('click',function(e){e.preventDefault(); history.pushState('',document.title,location.pathname+location.search); closeAll(); document.getElementById('help-articles')?.scrollIntoView({behavior:'smooth',block:'start'});});
+      const b=document.createElement('a');
+      b.href='#'; b.className='article-back-btn'; b.innerHTML='← العودة إلى المقالات';
+      b.addEventListener('click',function(e){
+        e.preventDefault();
+        history.pushState(null,'',location.pathname+location.search);
+        closeAll();
+        document.getElementById('help-articles')?.scrollIntoView({behavior:'smooth',block:'start'});
+      });
       target.insertBefore(b,target.firstChild);
     }
     if(scroll) setTimeout(()=>target.scrollIntoView({behavior:'smooth',block:'start'}),40);
     return true;
   }
   function route(){
-    const id=decodeURIComponent(location.hash.replace('#',''));
-    if(articleIds.includes(id)) openArticle(id,true); else closeAll();
+    const id=decodeURIComponent(location.hash.replace(/^#/,''));
+    if(articleIds.includes(id)) openArticle(id,true);
+    else closeAll();
   }
   document.addEventListener('click',function(e){
-    const a=e.target.closest('a[href^="#"]'); if(!a) return;
-    const id=a.getAttribute('href').slice(1);
-    if(articleIds.includes(id)){ e.preventDefault(); history.pushState(null,'','#'+id); openArticle(id,true); }
+    const a=e.target.closest('a[href]'); if(!a) return;
+    const href=a.getAttribute('href')||'';
+    if(!href.startsWith('#')) return;
+    const id=href.slice(1);
+    if(articleIds.includes(id)){
+      e.preventDefault();
+      if(location.hash!==href) history.pushState(null,'',href);
+      openArticle(id,true);
+    }
   });
-  window.addEventListener('hashchange',route); window.addEventListener('popstate',route);
+  window.addEventListener('hashchange',route);
+  window.addEventListener('popstate',route);
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',route); else route();
 })();
 </script>
